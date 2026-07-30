@@ -30,7 +30,7 @@ namespace DocumentUploadApp.MVC.Controllers
             model.CreatedDate = DateTime.UtcNow;
 
             var client = _clientFactory.CreateClient();
-            client.BaseAddress = new Uri("https://localhost:7211/");
+            client.BaseAddress = new Uri("https://documentupload-py7y.onrender.com/");
 
             using var form = new MultipartFormDataContent();
 
@@ -78,7 +78,7 @@ namespace DocumentUploadApp.MVC.Controllers
         {
             var client = _clientFactory.CreateClient();
 
-            client.BaseAddress = new Uri("https://localhost:7211/");
+            client.BaseAddress = new Uri("https://documentupload-py7y.onrender.com/");
 
             var response = await client.GetAsync($"api/Details/{id}");
 

@@ -1,11 +1,14 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
 WORKDIR /src
 
-COPY ["DocumentUploadApp.MVC.csproj", "./"]
+COPY ["DocumentUploadApp/DocumentUploadMVC.csproj", "DocumentUploadApp.MVC/"]
 
-RUN dotnet restore "DocumentUploadApp.MVC.csproj"
+RUN dotnet restore "DocumentUploadApp.MVC/DocumentUploadApp.MVC.csproj"
 
 COPY . .
+
+WORKDIR /src/DocumentUploadApp.MVC
 
 RUN dotnet publish "DocumentUploadApp.MVC.csproj" \
     -c Release \
@@ -24,4 +27,4 @@ ENV DOTNET_USE_POLLING_FILE_WATCHER=1
 
 EXPOSE 8080
 
-ENTRYPOINT ["dotnet","DocumentUploadApp.MVC.dll"]
+ENTRYPOINT ["dotnet", "DocumentUploadMVC.dll"]

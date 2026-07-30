@@ -44,7 +44,17 @@ namespace DocumentUploadApp
 
             var app = builder.Build();
 
-         app.UseSwagger();
+            app.MapGet("/health", () =>
+            {
+                return Results.Ok(new
+                {
+                    status = "Healthy",
+                    application = "CandidateManagement.API",
+                    timestamp = DateTime.UtcNow
+                });
+            });
+
+            app.UseSwagger();
 
          app.UseSwaggerUI(c =>
          {

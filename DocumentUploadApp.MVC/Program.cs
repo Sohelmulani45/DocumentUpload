@@ -13,6 +13,16 @@ namespace DocumentUploadApp.MVC
 
             var app = builder.Build();
 
+            app.MapGet("/health", () =>
+            {
+                return Results.Ok(new
+                {
+                    status = "Healthy",
+                    application = "CandidateManagement.MVC",
+                    timestamp = DateTime.UtcNow
+                });
+            });
+
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {

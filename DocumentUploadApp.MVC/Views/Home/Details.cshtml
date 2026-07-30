@@ -1,0 +1,147 @@
+﻿@model DocumentUploadApp.MVC.Models.EmployeeDetailsVM
+
+@{
+    ViewData["Title"] = "Employee Details";
+
+    string apiUrl = "https://localhost:7211";
+
+    string extension = System.IO.Path.GetExtension(Model.FileName ?? "").ToLower();
+}
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+            <h3>Employee Details</h3>
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-bordered">
+
+                <tr>
+                    <th style="width:220px;">Name</th>
+                    <td>@Model.Name</td>
+                </tr>
+
+                <tr>
+                    <th>Created Date (UTC)</th>
+                    <td>@Model.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                </tr>
+
+                <tr>
+                    <th>Uploaded File</th>
+
+                    <td>
+
+                        @if (!string.IsNullOrEmpty(Model.FileName))
+                        {
+                            @if (extension == ".jpg" ||
+                                                    extension == ".jpeg" ||
+                                                    extension == ".png" ||
+                                                    extension == ".gif" ||
+                                                    extension == ".bmp")
+                            {
+                                <img src="@($"{apiUrl}/api/Details/Download/{Model.Id}")"
+                                     width="250"
+                                     class="img-thumbnail" />
+
+                                <br />
+                        
+                                <br />
+
+                                <a href="@($"{apiUrl}/api/Details/Download/{Model.Id}")"
+                                   target="_blank"
+                                   class="btn btn-primary">
+
+                                    View Image
+
+                                </a>
+
+                                <a href="@($"{apiUrl}/api/Details/Download/{Model.Id}")"
+                                   class="btn btn-success ms-2">
+
+                                    Download Image
+
+                                </a>
+                            }
+                            else if (extension == ".pdf")
+                            {
+                                <span>📄 @Model.FileName</span>
+
+                                <br />
+                        
+                                <br />
+
+                                <a href="@($"{apiUrl}/api/Details/Download/{Model.Id}")"
+                                   target="_blank"
+                                   class="btn btn-danger">
+
+                                    Open PDF
+
+                                </a>
+
+                                <a href="@($"{apiUrl}/api/Details/Download/{Model.Id}")"
+                                   class="btn btn-success ms-2">
+
+                                    Download PDF
+
+                                </a>
+                            }
+                            else if (extension == ".zip")
+                            {
+                                <span>🗜️ @Model.FileName</span>
+
+                                <br />
+                        
+                                <br />
+
+                                <a href="@($"{apiUrl}/api/Details/Download/{Model.Id}")"
+                                   class="btn btn-warning">
+
+                                    Download ZIP
+
+                                </a>
+                            }
+                            else
+                            {
+                                <span>📁 @Model.FileName</span>
+
+                                <br />
+                        
+                                <br />
+
+                                <a href="@($"{apiUrl}/api/Details/Download/{Model.Id}")"
+                                   class="btn btn-success">
+
+                                    Download File
+
+                                </a>
+                            }
+                        }
+                        else
+                        {
+                            <span class="text-danger">
+                                No File Uploaded
+                            </span>
+                        }
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+            <a asp-action="Index"
+               class="btn btn-primary">
+
+                Add New Employee
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

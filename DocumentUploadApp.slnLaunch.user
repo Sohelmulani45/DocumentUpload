@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "DocumentUploadApp\\DocumentUploadApp.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "DocumentUploadApp.MVC\\DocumentUploadApp.MVC.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
